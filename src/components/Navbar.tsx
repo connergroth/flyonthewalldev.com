@@ -6,11 +6,11 @@ import { Menu } from 'lucide-react';
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const scrollToContact = (e: React.MouseEvent) => {
+  const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
       setIsOpen(false);
     }
   };
@@ -20,9 +20,9 @@ const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { href: '#projects', label: 'Projects' },
-    { href: '#team', label: 'Team' },
-    { href: '#contact', label: 'Contact', onClick: scrollToContact }
+    { href: '#projects', label: 'Projects', onClick: scrollToSection('projects') },
+    { href: '#team', label: 'Team', onClick: scrollToSection('team') },
+    { href: '#contact', label: 'Contact', onClick: scrollToSection('contact') }
   ];
 
   const NavLink = ({ href, label, onClick, className = '' }: { href: string; label: string; onClick?: (e: React.MouseEvent) => void; className?: string }) => (
