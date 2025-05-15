@@ -1,0 +1,64 @@
+@keyframes float {
+  0% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-12px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+}
+
+@keyframes float-delayed {
+  0% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-12px);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+}
+
+@keyframes float-right {
+  0% {
+    transform: translate(50%, 50%) translateY(0);
+  }
+  50% {
+    transform: translate(50%, 50%) translateY(-12px);
+  }
+  100% {
+    transform: translate(50%, 50%) translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite 1s;
+  will-change: transform;
+}
+
+.animate-float-right {
+  animation: float-right 8s ease-in-out infinite 2s;
+  will-change: transform;
+}
+
+/* Trail path styles */
+.fly-trail {
+  stroke: url(#trailGradient);
+  stroke-width: 1.5;
+  stroke-dasharray: 3,3;
+  stroke-linecap: round;
+  stroke-opacity: 0.6;
+  transition: stroke-opacity 0.3s ease;
+}
+
+.fly-trail-fade {
+  stroke-opacity: 0.1;
+} 

@@ -1,4 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import FlySVG from './FlySVG';
+import BackgroundShapes from './BackgroundShapes';
+import '../styles/animations.css';
 
 const FlyAnimation: React.FC = () => {
   const [isLanded, setIsLanded] = useState(false);
@@ -97,7 +100,51 @@ const FlyAnimation: React.FC = () => {
     };
   }, []); // Run only once on mount
   
-  // Animation function
+  // Update the trail path update logic in the animation function
+  const updateTrailPath = () => {
+    if (pathRef.current && frameCount.current % 3 === 0 && !isLanded) {
+      // Add current position to trail with buzzing effect applied
+      previousPositions.current.push({
+        x: positionRef.current.x + buzzingRef.current.x, 
+        y: positionRef.current.y + buzzingRef.current.y
+      });
+      
+      // Keep only last 40 positions for better performance
+      if (previousPositions.current.length > 40) {
+        previousPositions.current.shift();
+      }
+      
+      if (previousPositions.current.length > 1) {
+        // Generate path data using quadratic curves for smoother trail
+        let pathData = `M${previousPositions.current[0].x},${previousPositions.current[0].y}`;
+        
+        for (let i = 1; i < previousPositions.current.length - 1; i++) {
+          const xc = (previousPositions.current[i].x + previousPositions.current[i + 1].x) / 2;
+          const yc = (previousPositions.current[i].y + previousPositions.current[i + 1].y) / 2;
+          pathData += ` Q${previousPositions.current[i].x},${previousPositions.current[i].y} ${xc},${yc}`;
+        }
+        
+        // Add the last point
+        const lastPoint = previousPositions.current[previousPositions.current.length - 1];
+        pathData += ` L${lastPoint.x},${lastPoint.y}`;
+        
+        // Update the path with smooth transition
+        pathRef.current.setAttribute('d', pathData);
+        
+        // Add fade effect to older parts of the trail
+        const fadeStart = Math.max(0, previousPositions.current.length - 20);
+        const fadeEnd = previousPositions.current.length;
+        
+        if (fadeStart < fadeEnd) {
+          pathRef.current.classList.add('fly-trail-fade');
+        } else {
+          pathRef.current.classList.remove('fly-trail-fade');
+        }
+      }
+    }
+  };
+
+  // Update the animation function to use the new trail update
   const startAnimation = () => {
     const updateFlyPosition = () => {
       if (!isLanded && containerRef.current && flyRef.current) {
@@ -164,40 +211,12 @@ const FlyAnimation: React.FC = () => {
       }
       
       // Update the trail path
-      if (pathRef.current && frameCount.current % 3 === 0 && !isLanded) {
-        // Add current position to trail with buzzing effect applied
-        previousPositions.current.push({
-          x: positionRef.current.x + buzzingRef.current.x, 
-          y: positionRef.current.y + buzzingRef.current.y
-        });
-        
-        // Keep only last 60 positions for longer trail
-        if (previousPositions.current.length > 60) {
-          previousPositions.current.shift();
-        }
-        
-        if (previousPositions.current.length > 1) {
-          // Generate path data from positions
-          let pathData = `M${previousPositions.current[0].x},${previousPositions.current[0].y}`;
-          for (let i = 1; i < previousPositions.current.length; i++) {
-            pathData += ` L${previousPositions.current[i].x},${previousPositions.current[i].y}`;
-          }
-          
-          // Update the path
-          pathRef.current.setAttribute('d', pathData);
-          
-          // Adjust the stroke opacity to create fading effect
-          // Newer part of the path is more visible
-          pathRef.current.setAttribute('stroke-opacity', '0.6');
-        }
-      }
+      updateTrailPath();
       
       frameCount.current++;
-      // Always continue the animation loop
       animationFrameId.current = requestAnimationFrame(updateFlyPosition);
     };
     
-    // Start the animation loop
     animationFrameId.current = requestAnimationFrame(updateFlyPosition);
   };
 
@@ -215,11 +234,7 @@ const FlyAnimation: React.FC = () => {
           ref={pathRef}
           d="M0,0"
           fill="none"
-          stroke="url(#trailGradient)"
-          strokeWidth="1.5"
-          strokeDasharray="3,3"
-          strokeLinecap="round"
-          className="motion-reduce:hidden"
+          className="fly-trail motion-reduce:hidden"
         />
       </svg>
       
@@ -232,139 +247,11 @@ const FlyAnimation: React.FC = () => {
           { transform: `translate(${positionRef.current.x}px, ${positionRef.current.y}px) rotate(${directionRef.current}rad)` }
         }
       >
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
-          {/* Fly body */}
-          <ellipse
-            cx="12"
-            cy="12"
-            rx="3.4"
-            ry="4"
-            fill="#222222"
-            stroke="#111111"
-            strokeWidth="0.3"
-          />
-          
-          {/* Fly head */}
-          <circle
-            cx="15.4"
-            cy="10.3"
-            r="1.9"
-            fill="#222222"
-            stroke="#111111"
-            strokeWidth="0.3"
-          />
-          
-          {/* Wings (upper pair) */}
-          <path
-            d="M8.2 8.4Q5.9 7.5 4.1 8.6Q6.6 8.9 8.9 9.1"
-            fill="#444444"
-            fillOpacity="0.9"
-            className={isLanded ? "" : "animate-pulse"}
-          />
-          <path
-            d="M15.8 8.4Q18.1 7.5 19.9 8.6Q17.4 8.9 15.1 9.1"
-            fill="#444444"
-            fillOpacity="0.9"
-            className={isLanded ? "" : "animate-pulse"}
-          />
-          
-          {/* Wings (lower pair) */}
-          <path
-            d="M8.2 15.6Q5.9 16.5 4.1 15.4Q6.6 15.1 8.9 14.9"
-            fill="#444444"
-            fillOpacity="0.9"
-            className={isLanded ? "" : "animate-pulse"}
-          />
-          <path
-            d="M15.8 15.6Q18.1 16.5 19.9 15.4Q17.4 15.1 15.1 14.9"
-            fill="#444444"
-            fillOpacity="0.9"
-            className={isLanded ? "" : "animate-pulse"}
-          />
-          
-          {/* Eyes */}
-          <g fill="#FFFFFF">
-            <circle cx="16.1" cy="9.5" r="0.65" />
-            <circle cx="16.1" cy="11.0" r="0.65" />
-            {/* little highlight */}
-            <circle cx="15.95" cy="9.35" r="0.2" fill="#999999" />
-            <circle cx="15.95" cy="10.85" r="0.2" fill="#999999" />
-          </g>
-        </svg>
+        <FlySVG isLanded={isLanded} />
       </div>
       
-      {/* Abstract shapes in background */}
-      <div className="relative w-full h-full">
-        <div 
-          style={{ 
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: 'clamp(3rem, 4vw, 4rem)',
-            height: 'clamp(3rem, 4vw, 4rem)',
-            borderRadius: '0.75rem',
-            backgroundColor: 'rgba(96, 165, 250, 0.3)',
-            transform: 'translate(-50%, -50%)',
-            animation: 'floatAnimation 8s ease-in-out infinite',
-            willChange: 'transform'
-          }}
-        ></div>
-        <div 
-          style={{ 
-            position: 'absolute',
-            top: '33.333%',
-            left: '33.333%',
-            width: 'clamp(2.5rem, 3vw, 3rem)',
-            height: 'clamp(2.5rem, 3vw, 3rem)',
-            borderRadius: '9999px',
-            backgroundColor: 'rgba(74, 222, 128, 0.3)',
-            transform: 'translate(-50%, -50%)',
-            animation: 'floatAnimation 8s ease-in-out infinite 1s',
-            willChange: 'transform'
-          }}
-        ></div>
-        <div 
-          style={{ 
-            position: 'absolute',
-            bottom: '33.333%',
-            right: '33.333%',
-            width: 'clamp(2.75rem, 3.5vw, 3.5rem)',
-            height: 'clamp(2.75rem, 3.5vw, 3.5rem)',
-            borderRadius: '0.5rem',
-            backgroundColor: 'rgba(255, 107, 53, 0.3)',
-            transform: 'translate(50%, 50%)',
-            animation: 'floatAnimationRight 8s ease-in-out infinite 2s',
-            willChange: 'transform'
-          }}
-        ></div>
-
-        <style>
-          {`
-            @keyframes floatAnimation {
-              0% {
-                transform: translate(-50%, -50%) translateY(0);
-              }
-              50% {
-                transform: translate(-50%, -50%) translateY(-12px);
-              }
-              100% {
-                transform: translate(-50%, -50%) translateY(0);
-              }
-            }
-            @keyframes floatAnimationRight {
-              0% {
-                transform: translate(50%, 50%) translateY(0);
-              }
-              50% {
-                transform: translate(50%, 50%) translateY(-12px);
-              }
-              100% {
-                transform: translate(50%, 50%) translateY(0);
-              }
-            }
-          `}
-        </style>
-      </div>
+      {/* Background shapes */}
+      <BackgroundShapes />
     </div>
   );
 };

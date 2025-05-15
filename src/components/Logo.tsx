@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface LogoProps {
   size?: number;
@@ -12,8 +13,20 @@ const Logo: React.FC<LogoProps> = ({ size = 32, className = '', variant = 'defau
   const flyColor = isWhite ? '#222222' : '#FFFFF0';  // Dark fly for white background, light fly for dark background
   const strokeColor = isWhite ? '#222222' : 'currentColor';
   
+  const handleClick = (e: React.MouseEvent) => {
+    // If we're already on the home page, scroll to top
+    if (window.location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  
   return (
-    <div className={`inline-flex items-center ${className}`}>
+    <Link 
+      to="/" 
+      onClick={handleClick}
+      className={`inline-flex items-center hover:opacity-90 transition-opacity ${className}`}
+    >
       <svg
         width={size}
         height={size}
@@ -86,7 +99,7 @@ const Logo: React.FC<LogoProps> = ({ size = 32, className = '', variant = 'defau
 
       {/* Wordmark */}
       <span className="font-display font-bold">Fly on the Wall</span>
-    </div>
+    </Link>
   );
 };
 
