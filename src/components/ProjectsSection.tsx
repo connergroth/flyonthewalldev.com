@@ -27,8 +27,7 @@ const ProjectsSection: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">From ideas to impact.</h2>
           <p className="text-xl text-fly-muted max-w-3xl mx-auto">
-            We turn late-night "what ifs" into AI-powered apps people actually use. 
-            Our tools simplify, organize, and surprise—just like your smartest roommate would.
+            Smart software that handles the details, so you don’t have to.
           </p>
         </div>
         

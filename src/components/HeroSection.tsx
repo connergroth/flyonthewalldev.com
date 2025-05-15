@@ -9,8 +9,15 @@ const HeroSection: React.FC = () => {
     }
   };
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative min-h-[100vh] pt-16 flex flex-col items-center justify-center px-4 overflow-hidden">
+    <section className="relative min-h-[100vh] flex flex-col items-center justify-center px-4 overflow-visible">
       <div className="noise-bg absolute inset-0 z-0"></div>
       <div className="absolute inset-0 z-0">
         <FlyAnimation />
@@ -32,13 +39,14 @@ const HeroSection: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
           <button 
             onClick={scrollToProjects} 
-            className="hero-primary-button bg-[#222222] text-white hover:bg-[#333333] text-lg px-8 py-6 rounded-md font-medium"
+            className="hero-primary-button bg-[#222222] text-white hover:bg-[#333333] text-lg px-8 py-6 rounded-md font-medium transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg hover:translate-y-[-2px] active:translate-y-[1px]"
             style={{ backgroundColor: '#222222', color: 'white' }}
           >
             See Our Work
           </button>
           <button 
-            className="hero-secondary-button border-2 border-[#222222] text-[#222222] hover:bg-[#222222] hover:text-white text-lg px-8 py-6 rounded-md font-medium transition-colors"
+            onClick={scrollToContact}
+            className="hero-secondary-button border-2 border-[#222222] text-[#222222] hover:bg-[#222222]/10 text-lg px-8 py-6 rounded-md font-medium transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] hover:shadow-lg hover:translate-y-[-2px] active:translate-y-[1px] hover:border-[#222222]/80"
             style={{ borderColor: '#222222', color: '#222222' }}
           >
             Follow the Buzz

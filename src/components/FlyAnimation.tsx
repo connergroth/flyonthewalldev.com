@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const FlyAnimation: React.FC = () => {
   const [isLanded, setIsLanded] = useState(false);
   const [landingPosition, setLandingPosition] = useState({ x: 0, y: 0 });
+  const [landingSurface, setLandingSurface] = useState<'wall' | 'title'>('wall');
   
   // Use refs instead of state to avoid re-renders
   const positionRef = useRef({ x: 0, y: 0 });
@@ -13,13 +14,15 @@ const FlyAnimation: React.FC = () => {
   const previousPositions = useRef<Array<{x: number, y: number}>>([]);
   const frameCount = useRef(0);
   const animationFrameId = useRef<number | null>(null);
+  const restingTimeRef = useRef<number>(0);
   
-  // Flight parameters
-  const baseSpeed = 5; // base pixels per frame
-  const speedVariation = 2; // random variation
-  const turnChance = 0.05; // probability of changing direction each frame
-  const maxTurn = Math.PI / 8; // maximum turn angle in radians
+  // Flight parameters - slower and more erratic
+  const baseSpeed = 0.5; // base pixels per frame 
+  const speedVariation = 1.5; // random variation
+  const turnChance = 0.08; // increased probability of changing direction
+  const maxTurn = Math.PI / 6; // increased maximum turn angle
   const directionRef = useRef<number>(Math.random() * Math.PI * 2); // Initial random direction
+  const buzzingRef = useRef<{ x: number, y: number }>({ x: 0, y: 0 });
   
   // Initialize fly position
   useEffect(() => {
@@ -42,22 +45,49 @@ const FlyAnimation: React.FC = () => {
     const landingInterval = setInterval(() => {
       if (isLanded) return; // Skip if already landed
       
-      const shouldLand = Math.random() > 0.7; // 30% chance to land
+      const shouldLand = Math.random() > 0.3; // 40% chance to land (increased from 30%)
 
-      if (shouldLand && titleRef.current) {
-        const titleRect = titleRef.current.getBoundingClientRect();
-        // Pick a random spot on the title
-        const x = Math.random() * titleRect.width - titleRect.width / 2;
-        const y = Math.random() * titleRect.height - titleRect.height / 2;
-        setLandingPosition({ x, y });
+      if (shouldLand && containerRef.current) {
+        // Decide where to land - on walls or title
+        const landOnTitle = Math.random() > 0.7 && titleRef.current;
+        
+        if (landOnTitle && titleRef.current) {
+          // Land on title
+          const titleRect = titleRef.current.getBoundingClientRect();
+          const x = Math.random() * titleRect.width - titleRect.width / 2;
+          const y = Math.random() * titleRect.height - titleRect.height / 2;
+          setLandingPosition({ x, y });
+          setLandingSurface('title');
+        } else {
+          // Land on a wall
+          const rect = containerRef.current.getBoundingClientRect();
+          const halfWidth = rect.width / 2;
+          const halfHeight = rect.height / 2;
+          
+          // Choose which wall to land on
+          const wallChoices = [
+            { x: Math.random() * (rect.width - 40) - halfWidth + 20, y: -halfHeight + 10 }, // top
+            { x: Math.random() * (rect.width - 40) - halfWidth + 20, y: halfHeight - 10 }, // bottom
+            { x: -halfWidth + 10, y: Math.random() * (rect.height - 40) - halfHeight + 20 }, // left
+            { x: halfWidth - 10, y: Math.random() * (rect.height - 40) - halfHeight + 20 } // right
+          ];
+          
+          const wallIdx = Math.floor(Math.random() * 4);
+          setLandingPosition(wallChoices[wallIdx]);
+          setLandingSurface('wall');
+        }
+        
         setIsLanded(true);
         
-        // Take off after 2-4 seconds
+        // Random resting time - longer than before (4-8 seconds)
+        const restTime = 4000 + Math.random() * 4000;
+        restingTimeRef.current = Date.now() + restTime;
+        
         setTimeout(() => {
           setIsLanded(false);
-        }, 2000 + Math.random() * 2000);
+        }, restTime);
       }
-    }, 3000); // Check every 3 seconds
+    }, 5000); // Check less frequently (5s instead of 3s)
 
     return () => {
       clearInterval(landingInterval);
@@ -66,15 +96,6 @@ const FlyAnimation: React.FC = () => {
       }
     };
   }, []); // Run only once on mount
-  
-  // Handle landing state change
-  useEffect(() => {
-    if (isLanded) {
-      // Don't cancel animation frame, just stop updating position
-    } else {
-      // No need to restart animation since we never stopped it
-    }
-  }, [isLanded]);
   
   // Animation function
   const startAnimation = () => {
@@ -86,11 +107,21 @@ const FlyAnimation: React.FC = () => {
         
         // Randomly change direction sometimes
         if (Math.random() < turnChance) {
-          directionRef.current += (Math.random() * 2 - 1) * maxTurn;
+          // More dramatic turns sometimes
+          if (Math.random() < 0.2) {
+            // Sharp turn
+            directionRef.current += (Math.random() * 2 - 1) * maxTurn * 2;
+          } else {
+            // Normal turn
+            directionRef.current += (Math.random() * 2 - 1) * maxTurn;
+          }
         }
         
-        // Calculate speed with some variation
-        const speed = baseSpeed + Math.random() * speedVariation;
+        // Occasional pause mid-air (hovering)
+        const isHovering = Math.random() < 0.005; // 0.5% chance per frame
+        
+        // Calculate speed with more variation
+        const speed = isHovering ? 0.2 : baseSpeed + Math.random() * speedVariation;
         
         // Calculate new position
         let newX = positionRef.current.x + Math.cos(directionRef.current) * speed;
@@ -107,30 +138,57 @@ const FlyAnimation: React.FC = () => {
           newY = Math.max(-halfHeight, Math.min(halfHeight, newY));
         }
         
+        // Add small random buzzing effect (small figure-8 like movements)
+        buzzingRef.current.x = Math.sin(frameCount.current * 0.2) * 1.5;
+        buzzingRef.current.y = Math.sin(frameCount.current * 0.3) * 1.5;
+        
         // Update position ref (no state update to avoid re-renders)
         positionRef.current = { x: newX, y: newY };
         
-        // Update fly position directly
-        flyRef.current.style.transform = `translate(${positionRef.current.x}px, ${positionRef.current.y}px) rotate(${directionRef.current}rad)`;
+        // Update fly position directly with buzzing effect
+        flyRef.current.style.transform = `translate(${positionRef.current.x + buzzingRef.current.x}px, ${positionRef.current.y + buzzingRef.current.y}px) rotate(${directionRef.current}rad)`;
+      } else if (isLanded && flyRef.current) {
+        // Subtle movement when landed (slight buzzing)
+        const now = Date.now();
+        const restTimeRemaining = restingTimeRef.current - now;
+        const restProgress = Math.max(0, 1 - restTimeRemaining / 4000);
+        
+        // Increase movement as the fly is about to take off
+        const buzzAmplitude = restProgress < 0.7 ? 0.4 : 0.4 + (restProgress - 0.7) * 3;
+        
+        // Small buzzing even when landed
+        const landedBuzzX = Math.sin(frameCount.current * 0.1) * buzzAmplitude;
+        const landedBuzzY = Math.sin(frameCount.current * 0.15) * buzzAmplitude;
+        
+        flyRef.current.style.transform = `translate(${landingPosition.x + landedBuzzX}px, ${landingPosition.y + landedBuzzY}px) rotate(${landingSurface === 'wall' ? 0 : directionRef.current}rad)`;
       }
       
-      // Always update path regardless of landed state to ensure continuous trail
-      if (pathRef.current && frameCount.current % 2 === 0) {
-        // Add current position to trail
-        previousPositions.current.push({...positionRef.current});
+      // Update the trail path
+      if (pathRef.current && frameCount.current % 3 === 0 && !isLanded) {
+        // Add current position to trail with buzzing effect applied
+        previousPositions.current.push({
+          x: positionRef.current.x + buzzingRef.current.x, 
+          y: positionRef.current.y + buzzingRef.current.y
+        });
         
-        // Keep only last 40 positions for longer trail
-        if (previousPositions.current.length > 40) {
+        // Keep only last 60 positions for longer trail
+        if (previousPositions.current.length > 60) {
           previousPositions.current.shift();
         }
         
         if (previousPositions.current.length > 1) {
-          // Create path
+          // Generate path data from positions
           let pathData = `M${previousPositions.current[0].x},${previousPositions.current[0].y}`;
           for (let i = 1; i < previousPositions.current.length; i++) {
             pathData += ` L${previousPositions.current[i].x},${previousPositions.current[i].y}`;
           }
+          
+          // Update the path
           pathRef.current.setAttribute('d', pathData);
+          
+          // Adjust the stroke opacity to create fading effect
+          // Newer part of the path is more visible
+          pathRef.current.setAttribute('stroke-opacity', '0.6');
         }
       }
       
@@ -145,17 +203,22 @@ const FlyAnimation: React.FC = () => {
 
   return (
     <div ref={containerRef} className="absolute inset-0 z-0 w-full h-full overflow-visible pointer-events-none">
-      {/* Path tracing */}
+      {/* Path tracing for the dotted line trail */}
       <svg className="absolute top-1/2 left-1/2 w-full h-full transform -translate-x-1/2 -translate-y-1/2 overflow-visible">
+        <defs>
+          <linearGradient id="trailGradient" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#222222" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#222222" stopOpacity="0.7" />
+          </linearGradient>
+        </defs>
         <path
           ref={pathRef}
           d="M0,0"
           fill="none"
-          stroke="#222222"
-          strokeWidth="2"
-          strokeDasharray="4,3"
+          stroke="url(#trailGradient)"
+          strokeWidth="1.5"
+          strokeDasharray="3,3"
           strokeLinecap="round"
-          strokeOpacity="0.6"
           className="motion-reduce:hidden"
         />
       </svg>
@@ -165,28 +228,68 @@ const FlyAnimation: React.FC = () => {
         ref={flyRef}
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
         style={isLanded ? 
-          { transform: `translate(${landingPosition.x}px, ${landingPosition.y}px)` } : 
+          { transform: `translate(${landingPosition.x}px, ${landingPosition.y}px) rotate(${landingSurface === 'wall' ? 0 : directionRef.current}rad)` } : 
           { transform: `translate(${positionRef.current.x}px, ${positionRef.current.y}px) rotate(${directionRef.current}rad)` }
         }
       >
-        <svg width="30" height="24" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
           {/* Fly body */}
-          <ellipse cx="10" cy="8" rx="4" ry="5" fill="#222222" />
+          <ellipse
+            cx="12"
+            cy="12"
+            rx="3.4"
+            ry="4"
+            fill="#222222"
+            stroke="#111111"
+            strokeWidth="0.3"
+          />
           
           {/* Fly head */}
-          <circle cx="14" cy="6" r="2.5" fill="#222222" />
+          <circle
+            cx="15.4"
+            cy="10.3"
+            r="1.9"
+            fill="#222222"
+            stroke="#111111"
+            strokeWidth="0.3"
+          />
           
-          {/* Fly wings - top */}
-          <path d="M8 5C6 3 3 3 1 4C3 5 5 5 8 5Z" fill="#555555" fillOpacity="0.7" />
-          <path d="M12 5C14 3 17 3 19 4C17 5 15 5 12 5Z" fill="#555555" fillOpacity="0.7" />
+          {/* Wings (upper pair) */}
+          <path
+            d="M8.2 8.4Q5.9 7.5 4.1 8.6Q6.6 8.9 8.9 9.1"
+            fill="#444444"
+            fillOpacity="0.9"
+            className={isLanded ? "" : "animate-pulse"}
+          />
+          <path
+            d="M15.8 8.4Q18.1 7.5 19.9 8.6Q17.4 8.9 15.1 9.1"
+            fill="#444444"
+            fillOpacity="0.9"
+            className={isLanded ? "" : "animate-pulse"}
+          />
           
-          {/* Fly wings - bottom */}
-          <path d="M8 11C6 13 3 13 1 12C3 11 5 11 8 11Z" fill="#555555" fillOpacity="0.7" />
-          <path d="M12 11C14 13 17 13 19 12C17 11 15 11 12 11Z" fill="#555555" fillOpacity="0.7" />
+          {/* Wings (lower pair) */}
+          <path
+            d="M8.2 15.6Q5.9 16.5 4.1 15.4Q6.6 15.1 8.9 14.9"
+            fill="#444444"
+            fillOpacity="0.9"
+            className={isLanded ? "" : "animate-pulse"}
+          />
+          <path
+            d="M15.8 15.6Q18.1 16.5 19.9 15.4Q17.4 15.1 15.1 14.9"
+            fill="#444444"
+            fillOpacity="0.9"
+            className={isLanded ? "" : "animate-pulse"}
+          />
           
-          {/* Fly eyes */}
-          <circle cx="15" cy="5" r="0.8" fill="white" />
-          <circle cx="15" cy="7" r="0.8" fill="white" />
+          {/* Eyes */}
+          <g fill="#FFFFFF">
+            <circle cx="16.1" cy="9.5" r="0.65" />
+            <circle cx="16.1" cy="11.0" r="0.65" />
+            {/* little highlight */}
+            <circle cx="15.95" cy="9.35" r="0.2" fill="#999999" />
+            <circle cx="15.95" cy="10.85" r="0.2" fill="#999999" />
+          </g>
         </svg>
       </div>
       

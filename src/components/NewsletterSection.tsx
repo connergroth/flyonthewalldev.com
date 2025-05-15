@@ -28,7 +28,7 @@ const NewsletterSection: React.FC = () => {
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-6">Want to see what we launch next?</h2>
         <p className="text-xl text-fly-muted mb-8 max-w-2xl mx-auto">
-          Join our newsletter to stay in the loop with our latest projects, updates, and occasional fly puns that we just can't resist.
+          Join our newsletter to stay in the loop with our latest projects & updates.
         </p>
         
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">

@@ -1,16 +1,15 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, Globe } from "lucide-react";
 
 interface TeamMember {
   id: number;
   name: string;
   role: string;
   description: string;
-  funFact: string;
-  avatarUrl: string;
   github?: string;
   linkedin: string;
+  portfolio?: string;
 }
 
 const teamMembers: TeamMember[] = [
@@ -18,30 +17,26 @@ const teamMembers: TeamMember[] = [
     id: 1,
     name: "Conner",
     role: "Full Stack Developer",
-    description: ".",
-    funFact: ".",
-    avatarUrl: "/images/conner.jpg",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com"
+    description: "Computer Science student @ CU Boulder, Synthetic Biology Software Researcher, and SWE Team Lead.",
+    github: "https://github.com/connergroth",
+    linkedin: "https://www.linkedin.com/in/connergroth",
+    portfolio: "https://connergroth.com"
   },
   {
     id: 2,
     name: "Isaias",
     role: "Full Stack Developer",
-    description: "Creates elegant systems that solve complex problems with surprising simplicity.",
-    funFact: "Once optimized a database query so well it broke the monitoring tools.",
-    avatarUrl: "/images/isaias.jpg",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com"
+    description: "Computer Science student @ CU Boulder and Machine Learning Researcher.",
+    github: "https://github.com/ip-04",
+    linkedin: "https://www.linkedin.com/in/isaias-perez21/",
+    portfolio: "https://isaias-perez-portfolio.onrender.com/"
   },
   {
     id: 3,
     name: "Jake",
     role: "Legal + Product Strategy",
-    description: "Translates legal jargon into human language and reshapes ideas into market opportunities.",
-    funFact: "Can recite the entire script of The Social Network from memory.",
-    avatarUrl: "/images/jake.jpg",
-    linkedin: "https://linkedin.com"
+    description: "Pre-Law student @ Liberty, Intern @ Gard Law Firm.",
+    linkedin: "https://www.linkedin.com/in/jake-pechart-2516732b9/"
   }
 ];
 
@@ -56,48 +51,70 @@ const TeamSection: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {teamMembers.map((member) => (
-            <Card key={member.id} className="overflow-hidden border-0 shadow-md">
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src={member.avatarUrl} 
-                  alt={member.name}
-                  className="w-full h-full object-cover object-center"
-                />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-2xl">{member.name}</CardTitle>
-                <CardDescription className="text-fly-accent font-medium">
-                  {member.role}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-4">{member.description}</p>
-                <p className="text-sm italic">"{member.funFact}"</p>
-              </CardContent>
-              <CardFooter className="flex gap-4">
-                {member.github && (
-                  <a 
-                    href={member.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-fly-muted hover:text-fly-accent transition-colors"
-                  >
-                    <Github size={20} />
-                  </a>
-                )}
-                <a 
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-fly-muted hover:text-fly-accent transition-colors"
-                >
-                  <Linkedin size={20} />
-                </a>
-              </CardFooter>
-            </Card>
-          ))}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Team Photo */}
+          <div className="relative aspect-[3/4] w-full max-w-md mx-auto lg:mx-0">
+            <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-xl">
+              <img 
+                src="/images/team.jpg" 
+                alt="Fly on the Wall team"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            {/* Optional decorative elements */}
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-fly-accent/10 rounded-full blur-2xl"></div>
+            <div className="absolute -top-4 -left-4 w-32 h-32 bg-fly-accent/10 rounded-full blur-2xl"></div>
+          </div>
+
+          {/* Team Members Info */}
+          <div className="space-y-8">
+            {teamMembers.map((member) => (
+              <Card key={member.id} className="overflow-hidden border-0 shadow-md hover:shadow-lg transition-shadow duration-200">
+                <CardHeader>
+                  <CardTitle className="text-2xl">{member.name}</CardTitle>
+                  <CardDescription className="text-fly-accent font-medium">
+                    {member.role}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4 text-fly-muted">{member.description}</p>
+                  <div className="flex gap-4 pt-2">
+                    {member.github && (
+                      <a 
+                        href={member.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-fly-muted hover:text-fly-accent transition-all duration-200 hover:scale-110"
+                        aria-label={`${member.name}'s GitHub`}
+                      >
+                        <Github size={20} />
+                      </a>
+                    )}
+                    <a 
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-fly-muted hover:text-fly-accent transition-all duration-200 hover:scale-110"
+                      aria-label={`${member.name}'s LinkedIn`}
+                    >
+                      <Linkedin size={20} />
+                    </a>
+                    {member.portfolio && (
+                      <a 
+                        href={member.portfolio}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-fly-muted hover:text-fly-accent transition-all duration-200 hover:scale-110"
+                        aria-label={`${member.name}'s Portfolio`}
+                      >
+                        <Globe size={20} />
+                      </a>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>
