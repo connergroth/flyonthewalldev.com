@@ -16,7 +16,7 @@ const teamMembers: TeamMember[] = [
   {
     id: 1,
     name: "Conner",
-    role: "Full Stack Developer",
+    role: "Full-Stack Developer",
     description: "Computer Science student @ CU Boulder, Synthetic Biology Software Researcher, and SWE Team Lead.",
     github: "https://github.com/connergroth",
     linkedin: "https://www.linkedin.com/in/connergroth",
@@ -25,7 +25,7 @@ const teamMembers: TeamMember[] = [
   {
     id: 2,
     name: "Isaias",
-    role: "Full Stack Developer",
+    role: "Full-Stack Developer",
     description: "Computer Science student @ CU Boulder and Machine Learning Researcher.",
     github: "https://github.com/ip-04",
     linkedin: "https://www.linkedin.com/in/isaias-perez21/",
