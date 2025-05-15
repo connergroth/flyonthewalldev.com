@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-fly-accent after:transition-all after:duration-200 group-hover:after:w-full">GitHub</span>
               </a>
               <a 
-                href="mailto:team@flyonthewalldev.com" 
+                href="mailto:flyonthewalldev@gmail.com" 
                 className="flex items-center gap-2 text-white hover:text-fly-accent transition-all duration-200 hover:translate-y-[-1px] group"
                 aria-label="Contact"
               >
