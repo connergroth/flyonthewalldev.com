@@ -10,6 +10,7 @@ const Navbar: React.FC = () => {
     e.preventDefault();
     const section = document.getElementById(sectionId);
     if (section) {
+      window.history.pushState(null, '', `#${sectionId}`);
       section.scrollIntoView({ behavior: 'smooth' });
       setIsOpen(false);
     }
@@ -20,9 +21,9 @@ const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { href: '#projects', label: 'Projects', onClick: scrollToSection('projects') },
-    { href: '#team', label: 'Team', onClick: scrollToSection('team') },
-    { href: '#contact', label: 'Contact', onClick: scrollToSection('contact') }
+    { href: '/#projects', label: 'Projects', onClick: scrollToSection('projects') },
+    { href: '/#team', label: 'Team', onClick: scrollToSection('team') },
+    { href: '/#contact', label: 'Contact', onClick: scrollToSection('contact') }
   ];
 
   const NavLink = ({ href, label, onClick, className = '' }: { href: string; label: string; onClick?: (e: React.MouseEvent) => void; className?: string }) => (
