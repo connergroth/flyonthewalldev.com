@@ -188,11 +188,14 @@ export default {
 					}
 				},
 				'float': {
-					'0%, 100%': { 
+					'0%': { 
 						transform: 'translateY(0)'
 					},
 					'50%': { 
-						transform: 'translateY(-10px)'
+						transform: 'translateY(-20px)'
+					},
+					'100%': { 
+						transform: 'translateY(0)'
 					}
 				}
 			},

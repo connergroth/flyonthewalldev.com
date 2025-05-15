@@ -293,11 +293,77 @@ const FlyAnimation: React.FC = () => {
         </svg>
       </div>
       
-      {/* Abstract shapes in background (from original component) */}
+      {/* Abstract shapes in background */}
       <div className="relative w-full h-full">
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-xl bg-opacity-30 bg-blue-400 animate-float" style={{ animationDelay: '0s' }}></div>
-        <div className="absolute top-1/3 left-1/3 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-opacity-30 bg-green-400 animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-1/3 right-1/3 transform translate-x-1/2 translate-y-1/2 w-11 h-11 md:w-14 md:h-14 rounded-lg bg-opacity-30 bg-fly-accent animate-float" style={{ animationDelay: '2s' }}></div>
+        <div 
+          style={{ 
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: 'clamp(3rem, 4vw, 4rem)',
+            height: 'clamp(3rem, 4vw, 4rem)',
+            borderRadius: '0.75rem',
+            backgroundColor: 'rgba(96, 165, 250, 0.3)',
+            transform: 'translate(-50%, -50%)',
+            animation: 'floatAnimation 8s ease-in-out infinite',
+            willChange: 'transform'
+          }}
+        ></div>
+        <div 
+          style={{ 
+            position: 'absolute',
+            top: '33.333%',
+            left: '33.333%',
+            width: 'clamp(2.5rem, 3vw, 3rem)',
+            height: 'clamp(2.5rem, 3vw, 3rem)',
+            borderRadius: '9999px',
+            backgroundColor: 'rgba(74, 222, 128, 0.3)',
+            transform: 'translate(-50%, -50%)',
+            animation: 'floatAnimation 8s ease-in-out infinite 1s',
+            willChange: 'transform'
+          }}
+        ></div>
+        <div 
+          style={{ 
+            position: 'absolute',
+            bottom: '33.333%',
+            right: '33.333%',
+            width: 'clamp(2.75rem, 3.5vw, 3.5rem)',
+            height: 'clamp(2.75rem, 3.5vw, 3.5rem)',
+            borderRadius: '0.5rem',
+            backgroundColor: 'rgba(255, 107, 53, 0.3)',
+            transform: 'translate(50%, 50%)',
+            animation: 'floatAnimationRight 8s ease-in-out infinite 2s',
+            willChange: 'transform'
+          }}
+        ></div>
+
+        <style>
+          {`
+            @keyframes floatAnimation {
+              0% {
+                transform: translate(-50%, -50%) translateY(0);
+              }
+              50% {
+                transform: translate(-50%, -50%) translateY(-12px);
+              }
+              100% {
+                transform: translate(-50%, -50%) translateY(0);
+              }
+            }
+            @keyframes floatAnimationRight {
+              0% {
+                transform: translate(50%, 50%) translateY(0);
+              }
+              50% {
+                transform: translate(50%, 50%) translateY(-12px);
+              }
+              100% {
+                transform: translate(50%, 50%) translateY(0);
+              }
+            }
+          `}
+        </style>
       </div>
     </div>
   );
