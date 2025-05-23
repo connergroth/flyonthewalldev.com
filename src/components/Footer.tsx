@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
             </div>
             <div className="mb-6 text-left">
               <p className="text-white">© {currentYear} Fly on the Wall, LLC</p>
-              <p className="text-white text-sm mt-1">Built with React, Python, and friendship</p>
+              <p className="text-white text-sm mt-1">Built with AI, Machine Learning, & Friendship</p>
             </div>
           </div>
           

@@ -35,7 +35,7 @@ const teamMembers: TeamMember[] = [
     id: 3,
     name: "Jake",
     role: "Legal + Product Strategy",
-    description: "Pre-Law student @ Liberty, Intern @ Gard Law Firm.",
+    description: "Pre-Law student @ Liberty, Intern @ Legal Intern.",
     linkedin: "https://www.linkedin.com/in/jake-pechart-2516732b9/"
   }
 ];

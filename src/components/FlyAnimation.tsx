@@ -221,9 +221,9 @@ const FlyAnimation: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef} className="absolute inset-0 z-0 w-full h-full overflow-visible pointer-events-none">
+    <div ref={containerRef} className="absolute inset-0 z-0 w-full h-full overflow-hidden pointer-events-none">
       {/* Path tracing for the dotted line trail */}
-      <svg className="absolute top-1/2 left-1/2 w-full h-full transform -translate-x-1/2 -translate-y-1/2 overflow-visible">
+      <svg className="absolute top-1/2 left-1/2 w-full h-full transform -translate-x-1/2 -translate-y-1/2 overflow-hidden">
         <defs>
           <linearGradient id="trailGradient" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#222222" stopOpacity="0.1" />

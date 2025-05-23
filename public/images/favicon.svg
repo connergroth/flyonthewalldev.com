@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Badge -->
+  <!-- Badge - drawn first so it's behind everything -->
   <circle cx="12" cy="12" r="9" fill="#222222" />
 
-  <!-- Fly body -->
-  <ellipse
-    cx="12"
-    cy="12"
-    rx="3.4"
-    ry="4"
-    fill="#FFFFF0"
-    stroke="#FFFFF0"
-    strokeWidth="0.3"
-  />
-
-  <!-- Fly head -->
-  <circle
-    cx="15.4"
-    cy="10.3"
-    r="1.9"
-    fill="#FFFFF0"
-    stroke="#FFFFF0"
-    strokeWidth="0.3"
-  />
-
-  <!-- Wings (simplified for favicon) -->
+  <!-- Wings (upper pair) -->
   <path
     d="M8.2 8.4Q5.9 7.5 4.1 8.6Q6.6 8.9 8.9 9.1"
     fill="#FFFFF0"
@@ -35,6 +14,8 @@
     fill="#FFFFF0"
     fillOpacity="0.9"
   />
+
+  <!-- Wings (lower pair) -->
   <path
     d="M8.2 15.6Q5.9 16.5 4.1 15.4Q6.6 15.1 8.9 14.9"
     fill="#FFFFF0"
@@ -46,7 +27,33 @@
     fillOpacity="0.9"
   />
 
-  <!-- Eyes (simplified for favicon) -->
-  <circle cx="16.1" cy="9.5" r="0.65" fill="#FFFFF0" />
-  <circle cx="16.1" cy="11.0" r="0.65" fill="#FFFFF0" />
+  <!-- Fly body -->
+  <ellipse
+    cx="12"
+    cy="12"
+    rx="3.4"
+    ry="4"
+    fill="#FFFFF0"
+    stroke="#222222"
+    strokeWidth="0.3"
+  />
+
+  <!-- Fly head -->
+  <circle
+    cx="15.4"
+    cy="10.3"
+    r="1.9"
+    fill="#FFFFF0"
+    stroke="#222222"
+    strokeWidth="0.3"
+  />
+
+  <!-- Eyes -->
+  <g fill="#222222">
+    <circle cx="16.1" cy="9.5" r="0.65" />
+    <circle cx="16.1" cy="11.0" r="0.65" />
+    <!-- little highlight -->
+    <circle cx="15.95" cy="9.35" r="0.2" fill="#FFFFF0" />
+    <circle cx="15.95" cy="10.85" r="0.2" fill="#FFFFF0" />
+  </g>
 </svg> 

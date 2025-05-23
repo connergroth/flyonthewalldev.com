@@ -1,6 +1,62 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="180" height="180" rx="45" fill="#222222"/>
-  <path d="M120 90C120 106.569 106.569 120 90 120C73.4315 120 60 106.569 60 90C60 73.4315 73.4315 60 90 60C106.569 60 120 73.4315 120 90Z" fill="#222222" stroke="#FFFFF0" stroke-width="6"/>
-  <circle cx="90" cy="75" r="10" fill="#FFFFF0"/>
-  <ellipse cx="90" cy="105" rx="15" ry="10" fill="#FFFFF0"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="180" height="180" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background for Apple touch icon -->
+  <rect width="24" height="24" fill="white" />
+  
+  <!-- Badge - drawn first so it's behind everything -->
+  <circle cx="12" cy="12" r="9" fill="#222222" />
+
+  <!-- Wings (upper pair) -->
+  <path
+    d="M8.2 8.4Q5.9 7.5 4.1 8.6Q6.6 8.9 8.9 9.1"
+    fill="#FFFFF0"
+    fillOpacity="0.9"
+  />
+  <path
+    d="M15.8 8.4Q18.1 7.5 19.9 8.6Q17.4 8.9 15.1 9.1"
+    fill="#FFFFF0"
+    fillOpacity="0.9"
+  />
+
+  <!-- Wings (lower pair) -->
+  <path
+    d="M8.2 15.6Q5.9 16.5 4.1 15.4Q6.6 15.1 8.9 14.9"
+    fill="#FFFFF0"
+    fillOpacity="0.9"
+  />
+  <path
+    d="M15.8 15.6Q18.1 16.5 19.9 15.4Q17.4 15.1 15.1 14.9"
+    fill="#FFFFF0"
+    fillOpacity="0.9"
+  />
+
+  <!-- Fly body -->
+  <ellipse
+    cx="12"
+    cy="12"
+    rx="3.4"
+    ry="4"
+    fill="#FFFFF0"
+    stroke="#222222"
+    strokeWidth="0.3"
+  />
+
+  <!-- Fly head -->
+  <circle
+    cx="15.4"
+    cy="10.3"
+    r="1.9"
+    fill="#FFFFF0"
+    stroke="#222222"
+    strokeWidth="0.3"
+  />
+
+  <!-- Eyes -->
+  <g fill="#222222">
+    <circle cx="16.1" cy="9.5" r="0.65" />
+    <circle cx="16.1" cy="11.0" r="0.65" />
+    <!-- little highlight -->
+    <circle cx="15.95" cy="9.35" r="0.2" fill="#FFFFF0" />
+    <circle cx="15.95" cy="10.85" r="0.2" fill="#FFFFF0" />
+  </g>
 </svg> 
