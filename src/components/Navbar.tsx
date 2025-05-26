@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import Logo from './Logo';
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from './ui/sheet';
 import { Menu } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,25 +53,23 @@ const Navbar: React.FC = () => {
         </nav>
         
         {/* Mobile Navigation */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
+        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+          <DropdownMenuTrigger asChild>
             <button 
               className="md:hidden p-2 hover:bg-fly-accent/10 hover:text-fly-accent rounded-md transition-colors"
               aria-label="Open menu"
             >
               <Menu className="h-6 w-6" />
             </button>
-          </SheetTrigger>
-          <SheetContent 
-            side="right" 
-            className="w-[280px] sm:w-[320px] bg-fly-ivory/95 backdrop-blur-md border-l border-fly-muted/20 p-0"
+          </DropdownMenuTrigger>
+          <DropdownMenuContent 
+            className="w-[calc(100vw-2rem)] mt-2 bg-fly-ivory/95 backdrop-blur-md border border-fly-muted/20 shadow-lg"
+            align="end"
+            sideOffset={8}
           >
-            <SheetHeader className="px-6 py-4 border-b border-fly-muted/20">
-              <SheetTitle className="text-fly-DEFAULT font-medium">Menu</SheetTitle>
-            </SheetHeader>
             <nav className="flex flex-col divide-y divide-fly-muted/10">
               {navLinks.map((link) => (
-                <div key={link.href} className="px-6 py-4">
+                <div key={link.href} className="px-4 py-3">
                   <NavLink 
                     {...link} 
                     className="block text-base font-medium py-1"
@@ -75,8 +77,8 @@ const Navbar: React.FC = () => {
                 </div>
               ))}
             </nav>
-          </SheetContent>
-        </Sheet>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );

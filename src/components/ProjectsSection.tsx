@@ -76,8 +76,8 @@ const ProjectsSection: React.FC = () => {
                     </a>
                   </div>
                 </div>
-                <div className="hidden md:flex items-center justify-center relative">
-                  <img src={project.image} alt="PulsePlan screenshot" className="rounded-lg shadow-lg max-h-72 object-cover border border-fly-muted bg-white" />
+                <div className="flex items-center justify-center relative order-first md:order-last mb-6 md:mb-0">
+                  <img src={project.image} alt={`${project.title} screenshot`} className="rounded-lg shadow-lg w-full max-h-72 object-cover border border-fly-muted bg-white" />
                 </div>
               </div>
             </Card>
