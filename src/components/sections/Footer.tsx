@@ -54,7 +54,7 @@ const Footer = () => {
         </div>
         
         <div className="text-center text-slate-400 text-sm">
-          © {new Date().getFullYear()} Fly on the Wall LLC. All rights reserved.
+          © {new Date().getFullYear()} Fly on the Wall, LLC. All rights reserved.
         </div>
       </div>
     </footer>
