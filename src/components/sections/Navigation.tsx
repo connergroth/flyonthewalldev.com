@@ -16,9 +16,21 @@ const Navigation = () => {
           </span>
         </div>
         
+        <div className="hidden md:flex items-center space-x-8">
+          <a href="#project" className="text-slate-300 hover:text-white transition-colors">
+            Our Work
+          </a>
+          <a href="#team" className="text-slate-300 hover:text-white transition-colors">
+            Team
+          </a>
+          <a href="#contact" className="text-slate-300 hover:text-white transition-colors">
+            Contact
+          </a>
+        </div>
+
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="p-2 rounded-lg hover:bg-slate-800 transition-colors"
+          className="md:hidden p-2 rounded-lg hover:bg-slate-800 transition-colors"
         >
           {isMenuOpen ? (
             <X className="w-6 h-6 text-slate-300" />
@@ -28,9 +40,8 @@ const Navigation = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 px-6 py-4 animate-fade-in">
+        <div className="absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 px-6 py-4 animate-fade-in md:hidden">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col space-y-4">
               <a href="#project" className="text-slate-300 hover:text-white transition-colors">
