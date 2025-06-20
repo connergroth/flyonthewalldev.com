@@ -1,22 +1,37 @@
-import Navigation from "@/components/sections/Navigation";
-import Hero from "@/components/sections/Hero";
-import ProjectShowcase from "@/components/sections/ProjectShowcase";
-import Team from "@/components/sections/Team";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/sections/Footer";
+import React from 'react';
+import Navigation from '@/components/Navigation';
+import HeroContent from '@/components/HeroContent';
+import CompanySection from '@/components/CompanySection';
+import ProjectShowcase from '@/components/ProjectShowcase';
+import Team from '@/components/Team';
+import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
+import ScrollToHashElement from '@/components/ScrollToHashElement';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="relative w-full min-h-screen bg-black">
+      {/* Hash-based scroll handling */}
+      <ScrollToHashElement />
+      
+      {/* Navigation */}
       <Navigation />
       
-      <main className="relative">
-        <Hero />
-        <ProjectShowcase />
-        <Team />
-        <Contact />
-      </main>
-
+      {/* Hero Content */}
+      <HeroContent />
+      
+      {/* Company Section */}
+      <CompanySection />
+      
+      {/* Project Showcase Section */}
+      <ProjectShowcase />
+      
+      {/* Meet the Team Section */}
+      <Team />
+      {/* Contact Section */}
+      <Contact />
+      
+      {/* Footer */}
       <Footer />
     </div>
   );
