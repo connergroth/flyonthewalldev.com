@@ -111,6 +111,30 @@
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
+
+  /* Fix for mobile viewport height inconsistencies */
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  /* Mobile-specific text positioning fix */
+  @media (max-width: 768px) {
+    .min-h-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Ensure nested flex containers work correctly on mobile */
+    .min-h-screen > div {
+      width: 100%;
+    }
+  }
+
+  /* Optimized keyframes with GPU acceleration */
+  @keyframes fade-in {
+  }
 }
 
 /* Custom scrollbar */
