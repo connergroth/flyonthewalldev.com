@@ -37,8 +37,9 @@ const ModernTechGrid: React.FC = () => {
     if (!ctx) return;
 
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      if (!canvas.parentElement) return;
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
       // Clear gradient cache on resize
       gradientCacheRef.current.clear();
     };
@@ -70,28 +71,32 @@ const ModernTechGrid: React.FC = () => {
     const colors = ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444'];
 
     // Create AI processing nodes
-    for (let i = 0; i < 8; i++) {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const connections = [];
-      
-      // Create connections to other nodes
-      for (let j = 0; j < 3; j++) {
-        connections.push({
-          x: x + (Math.random() - 0.5) * 300,
-          y: y + (Math.random() - 0.5) * 300,
-          strength: Math.random()
+    const createAiNodes = () => {
+      for (let i = 0; i < 8; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const connections = [];
+        
+        // Create connections to other nodes
+        for (let j = 0; j < 3; j++) {
+          connections.push({
+            x: x + (Math.random() - 0.5) * 300,
+            y: y + (Math.random() - 0.5) * 300,
+            strength: Math.random()
+          });
+        }
+
+        aiNodes.push({
+          x,
+          y,
+          pulse: Math.random(),
+          connections,
+          processing: Math.random() > 0.7
         });
       }
+    };
 
-      aiNodes.push({
-        x,
-        y,
-        pulse: Math.random(),
-        connections,
-        processing: Math.random() > 0.7
-      });
-    }
+    createAiNodes();
 
     canvas.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -295,6 +300,10 @@ const ModernTechGrid: React.FC = () => {
 
     const handleResize = () => {
       updateCanvasSize();
+      // Reset state on resize
+      aiNodes.length = 0;
+      dataStreams.length = 0;
+      createAiNodes();
     };
     window.addEventListener('resize', handleResize);
 
@@ -312,7 +321,7 @@ const ModernTechGrid: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 transition-opacity duration-1000 ${
+      className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
         isLoaded ? 'opacity-100' : 'opacity-0'
       }`}
       style={{ background: 'linear-gradient(135deg, #111827 0%, #1f2937 100%)' }}

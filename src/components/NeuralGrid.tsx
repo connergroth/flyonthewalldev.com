@@ -15,8 +15,9 @@ const NeuralGrid: React.FC = () => {
 
     // Set canvas size
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      if (!canvas.parentElement) return;
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
     };
     updateCanvasSize();
 
@@ -26,31 +27,35 @@ const NeuralGrid: React.FC = () => {
     const pulses: Array<{ fromNode: number; toNode: number; progress: number; intensity: number }> = [];
 
     // Create grid nodes
-    const cols = Math.ceil(canvas.width / gridSize) + 1;
-    const rows = Math.ceil(canvas.height / gridSize) + 1;
+    const createNodes = () => {
+      const cols = Math.ceil(canvas.width / gridSize) + 1;
+      const rows = Math.ceil(canvas.height / gridSize) + 1;
 
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const x = col * gridSize;
-        const y = row * gridSize;
-        const nodeIndex = nodes.length;
-        
-        // Create connections to nearby nodes
-        const connections: number[] = [];
-        if (col > 0) connections.push(nodeIndex - 1); // left
-        if (row > 0) connections.push(nodeIndex - cols); // up
-        if (col > 0 && row > 0) connections.push(nodeIndex - cols - 1); // diagonal up-left
-        if (col < cols - 1 && row > 0) connections.push(nodeIndex - cols + 1); // diagonal up-right
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = col * gridSize;
+          const y = row * gridSize;
+          const nodeIndex = nodes.length;
+          
+          // Create connections to nearby nodes
+          const connections: number[] = [];
+          if (col > 0) connections.push(nodeIndex - 1); // left
+          if (row > 0) connections.push(nodeIndex - cols); // up
+          if (col > 0 && row > 0) connections.push(nodeIndex - cols - 1); // diagonal up-left
+          if (col < cols - 1 && row > 0) connections.push(nodeIndex - cols + 1); // diagonal up-right
 
-        nodes.push({
-          x,
-          y,
-          connections,
-          pulse: 0,
-          lastPulse: 0
-        });
+          nodes.push({
+            x,
+            y,
+            connections,
+            pulse: 0,
+            lastPulse: 0
+          });
+        }
       }
-    }
+    };
+
+    createNodes();
 
     // Mouse tracking
     const handleMouseMove = (e: MouseEvent) => {
@@ -196,6 +201,11 @@ const NeuralGrid: React.FC = () => {
     // Handle resize
     const handleResize = () => {
       updateCanvasSize();
+      // Re-initialize nodes and pulses on resize for a clean slate
+      // This part is simplified; a more complex solution might reposition them
+      nodes.length = 0;
+      pulses.length = 0;
+      createNodes();
     };
     window.addEventListener('resize', handleResize);
 
@@ -211,7 +221,7 @@ const NeuralGrid: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 transition-opacity duration-1000 ${
+      className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
         isLoaded ? 'opacity-100' : 'opacity-0'
       }`}
       style={{ background: '#0a0a0a' }}
