@@ -1,5 +1,6 @@
 import { Github, Linkedin, Globe } from "lucide-react";
 import { motion } from "framer-motion";
+import { animations } from '@/lib/animation-configs';
 
 const Team = () => {
   const containerVariants = {
@@ -9,11 +10,6 @@ const Team = () => {
         staggerChildren: 0.1,
       },
     },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.3, ease: "easeOut" as const } },
   };
 
   return (
@@ -43,7 +39,7 @@ const Team = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          <motion.div className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col" variants={itemVariants}>
+          <motion.div className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col" variants={animations.fadeInUp}>
             <div className="flex-grow">
               <h3 className="text-xl font-bold text-white mb-2">Conner</h3>
               <p className="font-medium mb-4 bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text">Full-Stack Developer</p>
@@ -58,7 +54,7 @@ const Team = () => {
             </div>
           </motion.div>
 
-          <motion.div className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col" variants={itemVariants}>
+          <motion.div className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col" variants={animations.fadeInUp}>
             <div className="flex-grow">
               <h3 className="text-xl font-bold text-white mb-2">Isaias</h3>
               <p className="font-medium mb-4 bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text">Full-Stack Developer</p>
@@ -73,7 +69,7 @@ const Team = () => {
             </div>
           </motion.div>
 
-          <motion.div className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col" variants={itemVariants}>
+          <motion.div className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col" variants={animations.fadeInUp}>
             <div className="flex-grow">
               <h3 className="text-xl font-bold text-white mb-2">Jake</h3>
               <p className="font-medium mb-4 bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text">Legal + Product Strategy</p>

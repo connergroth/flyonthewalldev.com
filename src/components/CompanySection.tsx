@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import ModernTechGrid from '@/components/ModernTechGrid';
 import { motion } from "framer-motion";
+import { animations } from '@/lib/animation-configs';
 
-// Memoized motion variants to prevent recreation on each render
+// Simple variants for non-card elements
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {

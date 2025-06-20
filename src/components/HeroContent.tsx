@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import NeuralGrid from '@/components/NeuralGrid';
 import { AnimatedFly } from '@/components/AnimatedFly';
+import { motion } from 'framer-motion';
 
 const HeroContent: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -19,39 +20,61 @@ const HeroContent: React.FC = () => {
       {/* Neural Grid Background for Hero */}
       <NeuralGrid />
       
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-8 md:pt-0 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-10 md:pt-0 text-center">
         
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Animated Fly above title */}
-          <div className="animate-fade-in flex justify-center">
+          <motion.div 
+            className="flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <AnimatedFly />
-          </div>
+          </motion.div>
 
           {/* Logo/Brand */}
-          <div className="animate-fade-in">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-4 tracking-tight">
               Fly on the Wall
             </h1>
             <div className="w-24 h-1 bg-white mx-auto rounded-full opacity-60"></div>
-          </div>
+          </motion.div>
 
           {/* Tagline */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
             Quietly building loud ideas
             </p>
-          </div>
+          </motion.div>
 
           {/* Description */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+          >
             <p className="text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto">
             A student-led startup building AI-powered tools that solve real problems — 
             with craft, care, and a little chaos.
             </p>
-          </div>
+          </motion.div>
 
           {/* CTA Buttons */}
-          <div className="animate-fade-in flex flex-col sm:flex-row gap-4 justify-center pt-8" style={{ animationDelay: '0.9s', animationFillMode: 'both' }}>
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+          >
             <Button 
               size="lg" 
               className="bg-white text-black hover:bg-gray-200 transition-all duration-300 px-8 py-3 text-lg font-medium hover-scale"
@@ -67,7 +90,7 @@ const HeroContent: React.FC = () => {
             >
               Follow the Buzz
             </Button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

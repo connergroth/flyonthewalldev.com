@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { AppleLogo } from "@/components/ui/AppleLogo";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { animations } from '@/lib/animation-configs';
 
 const ProjectShowcase = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -16,7 +17,7 @@ const ProjectShowcase = () => {
     "/images/demo3.png"
   ];
 
-  // Animation variants
+  // Animation variants for non-card elements
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -33,15 +34,6 @@ const ProjectShowcase = () => {
     visible: { 
       opacity: 1,
       transition: { duration: 0.4, ease: "easeOut" as const }
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.98 },
-    visible: { 
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.35, ease: "easeOut" as const }
     },
   };
 
@@ -84,8 +76,8 @@ const ProjectShowcase = () => {
       className="py-24 bg-black"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.3 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6 }}
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Centered Heading */}
@@ -94,7 +86,7 @@ const ProjectShowcase = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.5 }}
         >
           <motion.div 
             className="flex justify-center items-center gap-4 mb-6"
@@ -143,7 +135,7 @@ const ProjectShowcase = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.4 }}
         >
           {/* Left side - Content */}
           <motion.div 
@@ -153,12 +145,12 @@ const ProjectShowcase = () => {
             {/* Feature Cards */}
             <motion.div 
               className="grid gap-6"
-              variants={containerVariants}
+              variants={animations.staggerContainer}
             >
               {/* Intelligent Scheduling Card */}
               <motion.div 
                 className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
-                variants={cardVariants}
+                variants={animations.fadeInUp}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Intelligent Academic Scheduling</h3>
                 <p className="text-slate-300">
@@ -169,7 +161,7 @@ const ProjectShowcase = () => {
               {/* Dynamic Replanning Card */}
               <motion.div 
                 className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
-                variants={cardVariants}
+                variants={animations.fadeInUp}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Dynamic Replanning & Adjustments</h3>
                 <p className="text-slate-300">
@@ -180,7 +172,7 @@ const ProjectShowcase = () => {
               {/* Multi-Source Sync Card */}
               <motion.div 
                 className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
-                variants={cardVariants}
+                variants={animations.fadeInUp}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Multi-Source Data Sync</h3>
                 <p className="text-slate-300">
