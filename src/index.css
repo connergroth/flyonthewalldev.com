@@ -120,16 +120,7 @@
 
   /* Mobile-specific text positioning fix */
   @media (max-width: 768px) {
-    .min-h-screen {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    /* Ensure nested flex containers work correctly on mobile */
-    .min-h-screen > div {
-      width: 100%;
-    }
+    /* Removed problematic flex centering that was breaking mobile layout */
   }
 
   /* Optimized keyframes with GPU acceleration */
