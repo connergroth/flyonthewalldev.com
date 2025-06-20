@@ -19,7 +19,7 @@ const HeroContent: React.FC = () => {
       {/* Neural Grid Background for Hero */}
       <NeuralGrid />
       
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-8 md:pt-0 text-center">
         
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Animated Fly above title */}

@@ -29,19 +29,17 @@ const ProjectShowcase = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0 },
     visible: { 
-      opacity: 1, 
-      y: 0,
+      opacity: 1,
       transition: { duration: 0.4, ease: "easeOut" as const }
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 15, scale: 0.98 },
+    hidden: { opacity: 0, scale: 0.98 },
     visible: { 
-      opacity: 1, 
-      y: 0, 
+      opacity: 1,
       scale: 1,
       transition: { duration: 0.35, ease: "easeOut" as const }
     },
@@ -84,8 +82,8 @@ const ProjectShowcase = () => {
       ref={sectionRef}
       id="project" 
       className="py-24 bg-black"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.3 }}
     >
@@ -129,9 +127,9 @@ const ProjectShowcase = () => {
             className="flex justify-center items-center gap-6"
             variants={itemVariants}
           >
-            <a href="#" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-lg shadow-md hover:bg-slate-200 transition-all duration-500 ease-out transform hover:scale-105 group">
-              <AppleLogo className="w-5 h-5 transition-transform duration-500 ease-out group-hover:scale-110" />
-              <span className="transition-all duration-500 ease-out">Download on the App Store</span>
+            <a href="#" className="inline-flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-3 bg-white text-black font-semibold rounded-lg shadow-md hover:bg-slate-200 transition-all duration-500 ease-out transform hover:scale-105 group">
+              <AppleLogo className="w-7 h-7 sm:w-6 sm:h-6 md:w-5 md:h-5 transition-transform duration-500 ease-out group-hover:scale-110" />
+              <span className="text-xs sm:text-sm md:text-base transition-all duration-500 ease-out">Download on the App Store</span>
             </a>
             <a href="https://pulseplan.app" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 font-medium rounded-lg transition-all duration-500 ease-out transform hover:scale-105 group">
               <span className="transition-all duration-500 ease-out">Learn More</span>
