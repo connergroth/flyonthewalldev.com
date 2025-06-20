@@ -29,7 +29,7 @@ const HeroContent: React.FC = () => {
 
           {/* Logo/Brand */}
           <div className="animate-fade-in">
-            <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-4 tracking-tight">
               Fly on the Wall
             </h1>
             <div className="w-24 h-1 bg-white mx-auto rounded-full opacity-60"></div>

@@ -20,12 +20,12 @@ const itemVariants = {
 
 const CompanySection: React.FC = memo(() => {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative">
       {/* Modern Tech Grid Background */}
       <ModernTechGrid />
       
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center py-20 md:py-32 px-6 text-center">
         <motion.div 
           className="max-w-4xl mx-auto space-y-8"
           variants={containerVariants}
