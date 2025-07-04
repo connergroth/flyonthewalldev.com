@@ -160,6 +160,16 @@
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
+
+  /* Card fade-in animation for PulsePlan */
+  @keyframes card-fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .card-fade-in {
+    animation: card-fade-in 0.6s ease-out forwards;
+  }
 }
 
 /* Custom scrollbar */
