@@ -170,10 +170,6 @@ const Contact = () => {
                   </a>
                 </Button>
               </div>
-              
-              <p className="text-sm text-gray-400 text-center">
-                We'll never share your information with anyone.
-              </p>
             </form>
           </div>
         </motion.div>

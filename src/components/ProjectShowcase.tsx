@@ -3,7 +3,6 @@ import { ArrowUpRight } from "lucide-react";
 import { AppleLogo } from "@/components/ui/AppleLogo";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { animations } from '@/lib/animation-configs';
 
 const ProjectShowcase = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -76,7 +75,7 @@ const ProjectShowcase = () => {
       className="py-24 bg-black"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.6 }}
     >
       <div className="max-w-6xl mx-auto px-6">
@@ -86,7 +85,7 @@ const ProjectShowcase = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           <motion.div 
             className="flex justify-center items-center gap-4 mb-6"
@@ -135,7 +134,7 @@ const ProjectShowcase = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.15 }}
         >
           {/* Left side - Content */}
           <motion.div 
@@ -143,14 +142,14 @@ const ProjectShowcase = () => {
             variants={itemVariants}
           >
             {/* Feature Cards */}
-            <motion.div 
-              className="grid gap-6"
-              variants={animations.staggerContainer}
-            >
+            <div className="grid gap-6">
               {/* Intelligent Scheduling Card */}
               <motion.div 
                 className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
-                variants={animations.fadeInUp}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Intelligent Academic Scheduling</h3>
                 <p className="text-slate-300">
@@ -161,7 +160,10 @@ const ProjectShowcase = () => {
               {/* Dynamic Replanning Card */}
               <motion.div 
                 className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
-                variants={animations.fadeInUp}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Dynamic Replanning & Adjustments</h3>
                 <p className="text-slate-300">
@@ -172,14 +174,17 @@ const ProjectShowcase = () => {
               {/* Multi-Source Sync Card */}
               <motion.div 
                 className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
-                variants={animations.fadeInUp}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Multi-Source Data Sync</h3>
                 <p className="text-slate-300">
                   Connects directly with Canvas, Google Calendar, Outlook, Apple Calendar, Gmail, Notion, and more, keeping your academic, personal, and extracurricular commitments perfectly in sync.
                 </p>
               </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Right side - Optimized Animated App Mockup */}
@@ -226,21 +231,7 @@ const ProjectShowcase = () => {
               </AnimatePresence>
             )}
 
-            {/* Carousel indicators */}
-            {loadedImages.size > 0 && (
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                {images.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentImageIndex 
-                        ? 'bg-white scale-125' 
-                        : 'bg-white/30 hover:bg-white/50'
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
+
           </motion.div>
         </motion.div>
       </div>

@@ -33,8 +33,8 @@ export const AnimatedFly = () => {
           {/* Fly body */}
           <div className="w-3 h-6 bg-slate-200 rounded-full relative">
             {/* Wings */}
-            <div className="absolute -left-2 top-1 w-4 h-2 bg-slate-300/70 rounded-full animate-[wiggle_0.3s_ease-in-out_infinite] origin-[100%_50%]"></div>
-            <div className="absolute -right-2 top-1 w-4 h-2 bg-slate-300/70 rounded-full animate-[wiggle_0.3s_ease-in-out_infinite] origin-[0%_50%]"></div>
+            <div className="absolute -left-2 top-1 w-4 h-2 bg-slate-300/70 rounded-full animate-[buzz_0.15s_linear_infinite] origin-[100%_50%]"></div>
+            <div className="absolute -right-2 top-1 w-4 h-2 bg-slate-300/70 rounded-full animate-[buzz_0.15s_linear_infinite] origin-[0%_50%]"></div>
             
             {/* Eyes */}
             <div className="absolute top-0 left-0 w-1 h-1 bg-blue-400 rounded-full"></div>
