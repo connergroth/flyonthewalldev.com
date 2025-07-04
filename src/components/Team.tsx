@@ -16,8 +16,8 @@ const Team = () => {
       <div className="max-w-6xl mx-auto px-6">
         <motion.h2 
           className="text-5xl md:text-6xl font-bold text-white mb-16 text-center tracking-tight"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
@@ -26,7 +26,7 @@ const Team = () => {
         
         <div className="grid md:grid-cols-3 gap-8">
         <motion.div 
-              className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col"
+              className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 flex flex-col"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
@@ -47,7 +47,7 @@ const Team = () => {
           </motion.div>
 
                      <motion.div 
-             className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col"
+             className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 flex flex-col"
              initial={{ opacity: 0 }}
              whileInView={{ opacity: 1 }}
              viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
@@ -68,7 +68,7 @@ const Team = () => {
           </motion.div>
 
                      <motion.div 
-             className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col"
+             className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 flex flex-col"
              initial={{ opacity: 0 }}
              whileInView={{ opacity: 1 }}
              viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
