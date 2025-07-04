@@ -199,13 +199,33 @@ const NeuralGrid: React.FC = () => {
     }, 500);
 
     // Handle resize
+    let resizeTimeout: NodeJS.Timeout;
     const handleResize = () => {
-      updateCanvasSize();
-      // Re-initialize nodes and pulses on resize for a clean slate
-      // This part is simplified; a more complex solution might reposition them
-      nodes.length = 0;
-      pulses.length = 0;
-      createNodes();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const oldWidth = canvas.width;
+        const oldHeight = canvas.height;
+        updateCanvasSize();
+        
+        // Scale existing nodes instead of resetting them
+        if (oldWidth > 0 && oldHeight > 0) {
+          const scaleX = canvas.width / oldWidth;
+          const scaleY = canvas.height / oldHeight;
+          
+          // Scale existing nodes
+          nodes.forEach(node => {
+            node.x *= scaleX;
+            node.y *= scaleY;
+          });
+          
+          // Note: Pulses will naturally adjust as they're based on node positions
+        } else {
+          // Only reset if we don't have valid dimensions
+          nodes.length = 0;
+          pulses.length = 0;
+          createNodes();
+        }
+      }, 100);
     };
     window.addEventListener('resize', handleResize);
 
@@ -213,6 +233,7 @@ const NeuralGrid: React.FC = () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      clearTimeout(resizeTimeout);
       canvas.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
     };

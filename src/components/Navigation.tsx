@@ -10,8 +10,8 @@ const Navigation = () => {
 
   return (
     <header className="fixed top-6 inset-x-0 z-50">
-      <nav className="relative max-w-6xl mx-auto px-6">
-        <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-4">
+      <nav className="relative max-w-5xl mx-auto px-6">
+        <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl px-4 py-3">
           <div className="flex items-center justify-between">
             <button 
               onClick={scrollToTop}
@@ -25,7 +25,7 @@ const Navigation = () => {
               </span>
             </button>
 
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-6">
               <a href="#project" className="text-gray-300 hover:text-white transition-all duration-300 font-medium">
                 Our Work
               </a>

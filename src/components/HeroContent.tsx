@@ -22,7 +22,7 @@ const HeroContent: React.FC = () => {
       
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-10 md:pt-0 text-center">
         
-        <div className="max-w-4xl mx-auto space-y-8">
+        <div className="max-w-4xl mx-auto space-y-8 mt-8 md:mt-0">
           {/* Animated Fly above title */}
           <motion.div 
             className="flex justify-center"
@@ -39,7 +39,7 @@ const HeroContent: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-4 tracking-tight">
+            <h1 className="text-7xl md:text-8xl font-bold text-white mb-4 tracking-tight">
               Fly on the Wall
             </h1>
             <div className="w-24 h-1 bg-white mx-auto rounded-full opacity-60"></div>
@@ -56,8 +56,9 @@ const HeroContent: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* Description */}
+          {/* Description - Hidden on mobile */}
           <motion.div
+            className="hidden md:block"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}

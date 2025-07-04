@@ -9,7 +9,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3,
+      staggerChildren: 0.15,
     },
   },
 };
@@ -32,7 +32,7 @@ const CompanySection: React.FC = memo(() => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           {/* Main heading */}
           <motion.div variants={itemVariants}>

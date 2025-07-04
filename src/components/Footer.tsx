@@ -4,13 +4,18 @@ const Footer = () => {
   return (
     <footer className="border-t border-slate-700/50 bg-black backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-5 gap-8 mb-8">
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
+          <div className="col-span-2 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <span className="text-white font-semibold text-lg tracking-tight">Fly on the Wall</span>
+              <button 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="text-white font-semibold text-xl tracking-tight hover:opacity-80 transition-opacity duration-300 cursor-pointer"
+              >
+                Fly on the Wall, LLC
+              </button>
             </div>
-            <a href="mailto:flyonthewalldev@gmail.com" className="text-slate-400 hover:text-white transition-colors">
-              flyonthewalldev@gmail.com
+            <a href="mailto:hello@flyonthewalldev.com" className="text-slate-400 hover:text-white transition-colors">
+              hello@flyonthewalldev.com
             </a>
             <div className="flex space-x-4 mt-4">
               <a href="https://github.com/flyonthewalldev" className="text-slate-400 hover:text-white transition-colors">
@@ -26,8 +31,8 @@ const Footer = () => {
             <h4 className="text-white font-semibold mb-4">Products</h4>
             <ul className="space-y-2">
               <li>
-                <a href="https://pulseplan.app" className="text-slate-400 hover:text-white transition-colors flex items-center gap-2">
-                  PulsePlan <ExternalLink className="w-3 h-3" />
+                <a href="https://pulseplan.app" className="text-slate-400 hover:text-white transition-colors">
+                  PulsePlan
                 </a>
               </li>
             </ul>

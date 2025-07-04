@@ -298,12 +298,43 @@ const ModernTechGrid: React.FC = () => {
       animate();
     }, 500);
 
+    let resizeTimeout: NodeJS.Timeout;
     const handleResize = () => {
-      updateCanvasSize();
-      // Reset state on resize
-      aiNodes.length = 0;
-      dataStreams.length = 0;
-      createAiNodes();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const oldWidth = canvas.width;
+        const oldHeight = canvas.height;
+        updateCanvasSize();
+        
+        // Scale existing nodes instead of resetting them
+        if (oldWidth > 0 && oldHeight > 0) {
+          const scaleX = canvas.width / oldWidth;
+          const scaleY = canvas.height / oldHeight;
+          
+          // Scale AI nodes
+          aiNodes.forEach(node => {
+            node.x *= scaleX;
+            node.y *= scaleY;
+            node.connections.forEach(connection => {
+              connection.x *= scaleX;
+              connection.y *= scaleY;
+            });
+          });
+          
+          // Scale data streams
+          dataStreams.forEach(stream => {
+            stream.x *= scaleX;
+            stream.y *= scaleY;
+            stream.targetX *= scaleX;
+            stream.targetY *= scaleY;
+          });
+        } else {
+          // Only reset if we don't have valid dimensions
+          aiNodes.length = 0;
+          dataStreams.length = 0;
+          createAiNodes();
+        }
+      }, 100);
     };
     window.addEventListener('resize', handleResize);
 
@@ -311,6 +342,7 @@ const ModernTechGrid: React.FC = () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      clearTimeout(resizeTimeout);
       canvas.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', handleResize);
