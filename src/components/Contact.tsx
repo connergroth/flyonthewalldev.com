@@ -80,20 +80,20 @@ const Contact = () => {
         </motion.h2>
         
         <motion.div 
-          className="grid md:grid-cols-2 gap-12"
+          className="grid md:grid-cols-2 gap-12 items-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
         >
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="text-2xl font-bold text-white mb-6">Let's Build Something Amazing</h3>
             <p className="text-lg text-gray-300 leading-relaxed mb-8">
               Have a project in mind? Want to collaborate? Or just curious about what we're building? We'd love to hear from you.
             </p>
             
             <div className="space-y-4">
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center justify-center md:justify-start space-x-4">
                 <div className="w-10 h-10 bg-slate-700/30 rounded-lg flex items-center justify-center">
                   <Globe className="w-5 h-5 text-gray-300" />
                 </div>
