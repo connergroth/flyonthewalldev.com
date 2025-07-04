@@ -304,7 +304,7 @@ const ModernTechGrid: React.FC = () => {
       resizeTimeout = setTimeout(() => {
         const oldWidth = canvas.width;
         const oldHeight = canvas.height;
-        updateCanvasSize();
+      updateCanvasSize();
         
         // Scale existing nodes instead of resetting them
         if (oldWidth > 0 && oldHeight > 0) {
@@ -330,9 +330,9 @@ const ModernTechGrid: React.FC = () => {
           });
         } else {
           // Only reset if we don't have valid dimensions
-          aiNodes.length = 0;
-          dataStreams.length = 0;
-          createAiNodes();
+      aiNodes.length = 0;
+      dataStreams.length = 0;
+      createAiNodes();
         }
       }, 100);
     };

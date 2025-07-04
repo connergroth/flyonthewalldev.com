@@ -16,25 +16,7 @@ const ProjectShowcase = () => {
     "/images/demo3.png"
   ];
 
-  // Animation variants for non-card elements
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
-  };
 
-  const itemVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { duration: 0.4, ease: "easeOut" as const }
-    },
-  };
 
   // Preload images
   useEffect(() => {
@@ -69,27 +51,20 @@ const ProjectShowcase = () => {
   }, [isLoading, images.length]);
 
   return (
-    <motion.section 
+    <section 
       ref={sectionRef}
       id="project" 
       className="py-24 bg-black"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.6 }}
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Centered Heading */}
-        <motion.div 
-          className="text-center mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <div className="text-center mb-16">
           <motion.div 
             className="flex justify-center items-center gap-4 mb-6"
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <motion.img 
               src="/images/pulse.png" 
@@ -109,14 +84,20 @@ const ProjectShowcase = () => {
           
           <motion.p 
             className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto mb-8"
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           >
             Your personal academic co-pilot that intelligently builds and adapts your schedule using real-time data from your assignments, calendars, and personal study habits.
           </motion.p>
           
           <motion.div 
             className="flex justify-center items-center gap-6"
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
             <a href="#" className="inline-flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-4 md:px-6 py-3 bg-white text-black font-semibold rounded-lg shadow-md hover:bg-slate-200 transition-all duration-500 ease-out transform hover:scale-105 group">
               <AppleLogo className="w-7 h-7 sm:w-6 sm:h-6 md:w-5 md:h-5 transition-transform duration-500 ease-out group-hover:scale-110" />
@@ -127,15 +108,9 @@ const ProjectShowcase = () => {
               <ArrowUpRight className="w-4 h-4 transition-all duration-500 ease-out group-hover:translate-x-1 group-hover:-translate-y-1" />
             </a>
           </motion.div>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="grid lg:grid-cols-2 gap-16 items-center"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-        >
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left side - Content */}
           <div className="space-y-8">
             {/* Feature Cards */}
@@ -231,9 +206,9 @@ const ProjectShowcase = () => {
 
 
           </motion.div>
-        </motion.div>
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
