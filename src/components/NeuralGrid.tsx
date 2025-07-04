@@ -17,7 +17,8 @@ const NeuralGrid: React.FC = () => {
     const updateCanvasSize = () => {
       if (!canvas.parentElement) return;
       canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = canvas.parentElement.clientHeight;
+      // Use a fixed height instead of dynamic parent height
+      canvas.height = Math.max(800, window.innerHeight);
     };
     updateCanvasSize();
 
