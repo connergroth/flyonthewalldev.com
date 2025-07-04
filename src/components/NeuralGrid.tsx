@@ -205,7 +205,7 @@ const NeuralGrid: React.FC = () => {
       resizeTimeout = setTimeout(() => {
         const oldWidth = canvas.width;
         const oldHeight = canvas.height;
-        updateCanvasSize();
+      updateCanvasSize();
         
         // Scale existing nodes instead of resetting them
         if (oldWidth > 0 && oldHeight > 0) {
@@ -221,9 +221,9 @@ const NeuralGrid: React.FC = () => {
           // Note: Pulses will naturally adjust as they're based on node positions
         } else {
           // Only reset if we don't have valid dimensions
-          nodes.length = 0;
-          pulses.length = 0;
-          createNodes();
+      nodes.length = 0;
+      pulses.length = 0;
+      createNodes();
         }
       }, 100);
     };

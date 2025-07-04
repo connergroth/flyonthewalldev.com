@@ -25,7 +25,7 @@ const Team = () => {
         </motion.h2>
         
         <div className="grid md:grid-cols-3 gap-8">
-                      <motion.div 
+        <motion.div 
               className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
