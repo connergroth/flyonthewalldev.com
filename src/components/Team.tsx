@@ -29,7 +29,7 @@ const Team = () => {
               className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             >
             <div className="flex-grow">
@@ -50,7 +50,7 @@ const Team = () => {
              className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col"
              initial={{ opacity: 0 }}
              whileInView={{ opacity: 1 }}
-             viewport={{ once: true }}
+             viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
            >
             <div className="flex-grow">
@@ -71,7 +71,7 @@ const Team = () => {
              className="group bg-slate-800/30 rounded-2xl p-8 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300 hover:transform hover:scale-105 flex flex-col"
              initial={{ opacity: 0 }}
              whileInView={{ opacity: 1 }}
-             viewport={{ once: true }}
+             viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
            >
             <div className="flex-grow">

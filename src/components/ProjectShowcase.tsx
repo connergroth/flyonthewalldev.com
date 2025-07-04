@@ -137,10 +137,7 @@ const ProjectShowcase = () => {
           viewport={{ once: true, amount: 0.15 }}
         >
           {/* Left side - Content */}
-          <motion.div 
-            className="space-y-8"
-            variants={itemVariants}
-          >
+          <div className="space-y-8">
             {/* Feature Cards */}
             <div className="grid gap-6">
               {/* Intelligent Scheduling Card */}
@@ -148,7 +145,7 @@ const ProjectShowcase = () => {
                 className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
                 transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Intelligent Academic Scheduling</h3>
@@ -162,7 +159,7 @@ const ProjectShowcase = () => {
                 className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Dynamic Replanning & Adjustments</h3>
@@ -176,7 +173,7 @@ const ProjectShowcase = () => {
                 className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
                 transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Multi-Source Data Sync</h3>
@@ -185,17 +182,18 @@ const ProjectShowcase = () => {
                 </p>
               </motion.div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right side - Optimized Animated App Mockup */}
           <motion.div 
             className="flex-1 w-full max-w-md mx-auto lg:mx-0 relative h-[650px] overflow-hidden"
-            variants={itemVariants}
+            initial={{ opacity: 0 }}
             whileInView={{ 
+              opacity: 1,
               scale: [0.8, 1.05, 1],
               transition: { duration: 0.8, ease: "easeOut" }
             }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
           >
             {isLoading && (
               <div className="absolute inset-0 bg-slate-800/30 rounded-2xl flex items-center justify-center">
