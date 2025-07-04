@@ -16,11 +16,13 @@ const HeroContent: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative h-screen">
       {/* Neural Grid Background for Hero */}
-      <NeuralGrid />
+      <div className="absolute inset-0">
+        <NeuralGrid />
+      </div>
       
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 pt-10 md:pt-0 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center h-screen px-6 pt-10 md:pt-0 text-center">
         
         <div className="max-w-4xl mx-auto space-y-8 mt-8 md:mt-0">
           {/* Animated Fly above title */}

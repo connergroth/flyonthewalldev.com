@@ -108,49 +108,52 @@ const ProjectShowcase = () => {
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left side - Content */}
-          <motion.div 
-            className="space-y-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
+          <div className="space-y-8">
             {/* Feature Cards */}
             <div className="grid gap-6">
               {/* Intelligent Scheduling Card */}
-              <div 
-                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 card-fade-in"
-                style={{ animationDelay: '0.1s' }}
+              <motion.div 
+                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
+                transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Intelligent Academic Scheduling</h3>
                 <p className="text-slate-300">
                   Integrates your Canvas assignments, personal tasks, and calendar events to automatically generate your daily and weekly schedule, factoring in deadlines, priorities, workload estimates, and available time.
                 </p>
-              </div>
+              </motion.div>
 
               {/* Dynamic Replanning Card */}
-              <div 
-                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 card-fade-in"
-                style={{ animationDelay: '0.2s' }}
+              <motion.div 
+                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Dynamic Replanning & Adjustments</h3>
                 <p className="text-slate-300">
                   Your schedule continuously updates as new assignments arrive, tasks are completed or missed, and real-life changes happen. PulsePlan automatically reshuffles your plan to keep you on track.
                 </p>
-              </div>
+              </motion.div>
 
               {/* Multi-Source Sync Card */}
-              <div 
-                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 card-fade-in"
-                style={{ animationDelay: '0.3s' }}
+              <motion.div 
+                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
+                transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
               >
                 <h3 className="text-xl font-bold text-white mb-3">Multi-Source Data Sync</h3>
                 <p className="text-slate-300">
                   Connects directly with Canvas, Google Calendar, Outlook, Apple Calendar, Gmail, Notion, and more, keeping your academic, personal, and extracurricular commitments perfectly in sync.
                 </p>
-              </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right side - Optimized Animated App Mockup */}
           <motion.div 
