@@ -1,6 +1,6 @@
 # Fly on the Wall
 
-A student-led startup building AI-powered tools that solve real problems.
+A sleek landing page featuring Fly on the Wall projects and founders.
 
 ## Tech Stack
 
