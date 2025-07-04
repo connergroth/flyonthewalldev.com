@@ -61,19 +61,15 @@ const ProjectShowcase = () => {
         <div className="text-center mb-16">
           <motion.div 
             className="flex justify-center items-center gap-4 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <motion.img 
+            <img 
               src="/images/pulse.png" 
               alt="PulsePlan Logo" 
               className="w-12 h-12"
-              initial={{ scale: 0, rotate: -180 }}
-              whileInView={{ scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
             />
             <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight">
               <span className="bg-white text-transparent bg-clip-text">
@@ -84,8 +80,8 @@ const ProjectShowcase = () => {
           
           <motion.p 
             className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           >
@@ -94,8 +90,8 @@ const ProjectShowcase = () => {
           
           <motion.div 
             className="flex justify-center items-center gap-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           >
@@ -117,7 +113,7 @@ const ProjectShowcase = () => {
             <div className="grid gap-6">
               {/* Intelligent Scheduling Card */}
               <motion.div 
-                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
+                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
@@ -131,7 +127,7 @@ const ProjectShowcase = () => {
 
               {/* Dynamic Replanning Card */}
               <motion.div 
-                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
+                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
@@ -145,7 +141,7 @@ const ProjectShowcase = () => {
 
               {/* Multi-Source Sync Card */}
               <motion.div 
-                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50 transition-all duration-300"
+                className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/30 hover:border-slate-600/50"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
