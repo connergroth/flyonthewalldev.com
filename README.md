@@ -13,11 +13,11 @@ A sleek landing page featuring Fly on the Wall projects and founders.
 
 ```
 flyonthewalldev.com/
-├── public/                 # Static assets
-│   ├── images/            # Image files
-│   └── favicon.svg        # Site favicon
+├── public/               # Static assets
+│   ├── images/           # Image files
+│   └── favicon.svg       # Site favicon
 ├── src/
-│   ├── components/        # React components
+│   ├── components/       # React components
 │   │   ├── ui/           # Reusable UI components
 │   │   └── ...           # Page-specific components
 │   ├── hooks/            # Custom React hooks
